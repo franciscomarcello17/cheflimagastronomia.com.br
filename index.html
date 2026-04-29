@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Anti-flash: aplica o tema salvo antes do CSS carregar -->
+  <script>(function(){var t=localStorage.getItem('chefflima-theme')||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}());</script>
+  <meta name="description" content="Cheff Lima – Chef profissional com 20 anos de experiência. Jantares privados, eventos, casamentos e consultoria gastronômica no norte de Santa Catarina." />
+  <meta name="keywords" content="chef profissional, jantar privado, eventos gastronômicos, chef santa catarina, gastronomia de alto padrão, Cheff Lima" />
+  <meta name="author" content="Cheff Lima" />
+  <meta property="og:title" content="Cheff Lima – Gastronomia de Alto Padrão" />
+  <meta property="og:description" content="Transforme seu evento em uma experiência gastronômica inesquecível." />
+  <meta property="og:type" content="website" />
+  <title>Cheff Lima – Gastronomia de Alto Padrão</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER / NAV ===================== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#home" class="nav__logo">
+        <span class="nav__logo-text">Cheff Lima</span>
+        <span class="nav__logo-sub">Gastronomia de Alto Padrão</span>
+      </a>
+
+      <ul class="nav__menu" id="navMenu">
+        <li class="nav__item"><a href="#home" class="nav__link">Início</a></li>
+        <li class="nav__item"><a href="#sobre" class="nav__link">Sobre</a></li>
+        <li class="nav__item"><a href="#servicos" class="nav__link">Serviços</a></li>
+        <li class="nav__item"><a href="#cardapio" class="nav__link">Cardápio</a></li>
+        <li class="nav__item"><a href="#galeria" class="nav__link">Galeria</a></li>
+        <li class="nav__item"><a href="#contato" class="nav__link nav__link--cta">Contato</a></li>
+      </ul>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar para tema claro">
+        <i class="fas fa-sun" id="themeIcon"></i>
+      </button>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+      <div class="hero__bg"></div>
+      <div class="hero__overlay"></div>
+
+      <!-- Photo placeholder -->
+      <div class="hero__photo-wrapper">
+        <div class="hero__photo-placeholder">
+          <i class="fas fa-user-tie"></i>
+          <span>Foto do Chef</span>
+        </div>
+      </div>
+
+      <div class="hero__content container">
+        <p class="hero__eyebrow">Chef Profissional</p>
+        <h1 class="hero__title">
+          Uma experiência<br />
+          <em>gastronômica</em><br />
+          inesquecível
+        </h1>
+        <p class="hero__subtitle">
+          20 anos transformando ingredientes em memórias afetivas.<br />
+          Do jantar íntimo ao grande evento — cada detalhe importa.
+        </p>
+        <div class="hero__actions">
+          <a href="#contato" class="btn btn--primary">Reserve seu evento</a>
+          <a href="#sobre" class="btn btn--outline">Conheça o Chef</a>
+        </div>
+      </div>
+
+      <div class="hero__scroll-indicator">
+        <span>Deslize</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- ===================== BADGES / NUMBERS ===================== -->
+    <section class="badges">
+      <div class="container">
+        <div class="badges__grid">
+          <div class="badge-item">
+            <span class="badge-item__number" data-count="20">0</span>
+            <span class="badge-item__label">Anos de Experiência</span>
+          </div>
+          <div class="badge-item">
+            <span class="badge-item__number" data-count="500">0</span>
+            <span class="badge-item__label">Eventos Realizados</span>
+          </div>
+          <div class="badge-item">
+            <span class="badge-item__number" data-count="12">0</span>
+            <span class="badge-item__label">Restaurantes</span>
+          </div>
+          <div class="badge-item">
+            <span class="badge-item__number" data-count="5000">0</span>
+            <span class="badge-item__label">Convidados Encantados</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SOBRE ===================== -->
+    <section class="about" id="sobre">
+      <div class="container">
+        <div class="about__grid">
+
+          <div class="about__visual">
+            <div class="about__photo-frame">
+              <div class="about__photo-placeholder">
+                <i class="fas fa-utensils"></i>
+                <span>Foto do Chef</span>
+              </div>
+            </div>
+            <div class="about__quote-card">
+              <i class="fas fa-quote-left"></i>
+              <p>"Cozinhar é um ato de amor. Cada prato é uma história que quero contar para você."</p>
+              <cite>— Cheff Lima</cite>
+            </div>
+          </div>
+
+          <div class="about__content">
+            <p class="section-eyebrow">Sobre o Chef</p>
+            <h2 class="section-title">Uma trajetória construída com paixão e dedicação</h2>
+
+            <p class="about__text">
+              Natural do norte de Santa Catarina, Cheff Lima iniciou sua jornada na gastronomia aos 18 anos, movido por uma paixão inata pelos sabores e pela arte de bem receber. Ao longo de duas décadas, sua trajetória o levou pelos melhores restaurantes do Sul do Brasil e por cozinhas internacionais, onde aperfeiçoou técnicas clássicas e contemporâneas.
+            </p>
+            <p class="about__text">
+              Com passagens por renomados estabelecimentos em São Paulo, Florianópolis e no exterior, o chef desenvolveu uma assinatura gastronômica única: a fusão sofisticada entre a rica culinária regional catarinense e as grandes escolas da gastronomia mundial.
+            </p>
+            <p class="about__text">
+              Hoje, Cheff Lima coloca toda essa bagagem a serviço de experiências exclusivas — jantares privados, eventos corporativos, casamentos e momentos especiais que ficam na memória de cada convidado.
+            </p>
+
+            <div class="about__highlights">
+              <div class="highlight-item">
+                <i class="fas fa-award"></i>
+                <span>Formação em Gastronomia Internacional</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-star"></i>
+                <span>Experiência em restaurantes de alto padrão</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-heart"></i>
+                <span>Especialista em eventos e gastronomia afetiva</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-leaf"></i>
+                <span>Valorização de ingredientes locais e sazonais</span>
+              </div>
+            </div>
+
+            <div class="about__specialties">
+              <span class="specialty-tag">Culinária Francesa</span>
+              <span class="specialty-tag">Mediterrânea</span>
+              <span class="specialty-tag">Brasileira Contemporânea</span>
+              <span class="specialty-tag">Confeitaria Fina</span>
+              <span class="specialty-tag">Molecular</span>
+              <span class="specialty-tag">Grelhados Premium</span>
+            </div>
+
+            <a href="#contato" class="btn btn--primary">Fale com o Chef</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SERVIÇOS ===================== -->
+    <section class="services" id="servicos">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">O que o Chef oferece</p>
+          <h2 class="section-title">Serviços Exclusivos</h2>
+          <p class="section-subtitle">Cada ocasião é única. Cada cardápio é criado especialmente para você.</p>
+        </div>
+
+        <div class="services__grid">
+
+          <div class="service-card" data-aos="fade-up">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-wine-glass-alt"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Jantar Privado</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Jantar Privado</h3>
+              <p class="service-card__desc">Uma experiência gastronômica exclusiva na sua residência ou no local de sua preferência. Cardápio personalizado, mise en place impecável e toda a atenção dedicada a você e seus convidados.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-rings-wedding"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Casamentos</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Casamentos</h3>
+              <p class="service-card__desc">Menu sofisticado e personalizado para o dia mais especial. Do coquetel ao jantar, cada detalhe pensado para impressionar seus convidados e tornar a celebração inesquecível.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Eventos Corporativos</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Eventos Corporativos</h3>
+              <p class="service-card__desc">Impressione clientes e parceiros com uma experiência gastronômica que reflete a excelência da sua empresa. Serviço profissional e cardápio de alto padrão.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="service-card" data-aos="fade-up">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-birthday-cake"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Aniversários</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Aniversários & Celebrações</h3>
+              <p class="service-card__desc">Celebre com estilo e sabor. Menus completos ou temáticos para aniversários, formaturas e datas comemorativas especiais, com apresentação digna de revista.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Noivados & Chá de Panela</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Noivados & Chá de Panela</h3>
+              <p class="service-card__desc">Momentos que merecem ser celebrados com requinte. Menus românticos e temáticos para noivados íntimos e chás de panela sofisticados e memoráveis.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Chef em Casa</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Experiência Chef em Casa</h3>
+              <p class="service-card__desc">Leve a experiência de um grande restaurante para dentro da sua casa. O chef vai até você, prepara tudo com o mais alto padrão e você só precisa aproveitar.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="service-card" data-aos="fade-up">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Eventos Intimistas</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Eventos Intimistas</h3>
+              <p class="service-card__desc">Para grupos pequenos que valorizam a qualidade e a exclusividade. Jantares de degustação, happy hours gourmet e encontros gastronômicos com toque artístico.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Consultoria Gastronômica</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Consultoria Gastronômica</h3>
+              <p class="service-card__desc">Desenvolvimento de cardápios, treinamento de equipe, implantação de processos e consultoria completa para restaurantes que buscam elevar seu padrão de qualidade.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card__icon-wrap">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <div class="service-card__img-placeholder">
+              <span>Desenvolvimento de Cardápios</span>
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">Desenvolvimento de Cardápios</h3>
+              <p class="service-card__desc">Criação de menus personalizados alinhados à identidade do seu negócio ou evento. Equilíbrio entre técnica, sazonalidade, custo e excelência sensorial.</p>
+              <a href="#contato" class="service-card__link">Solicitar orçamento <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA BANNER ===================== -->
+    <section class="cta-banner">
+      <div class="cta-banner__overlay"></div>
+      <div class="container">
+        <div class="cta-banner__content">
+          <h2 class="cta-banner__title">Transforme seu evento em uma<br /><em>experiência gastronômica inesquecível</em></h2>
+          <p class="cta-banner__text">Entre em contato agora e vamos criar juntos o menu perfeito para o seu momento especial.</p>
+          <div class="cta-banner__actions">
+            <a href="https://wa.me/5547999999999" target="_blank" class="btn btn--whatsapp">
+              <i class="fab fa-whatsapp"></i> Falar pelo WhatsApp
+            </a>
+            <a href="#contato" class="btn btn--outline-white">Ver todos os serviços</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CARDÁPIO / ESPECIALIDADES ===================== -->
+    <section class="menu" id="cardapio">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Criações do Chef</p>
+          <h2 class="section-title">Especialidades & Cardápio</h2>
+          <p class="section-subtitle">Uma seleção das criações que definem a assinatura gastronômica do Cheff Lima.</p>
+        </div>
+
+        <div class="menu__tabs">
+          <button class="menu__tab active" data-tab="entradas">Entradas</button>
+          <button class="menu__tab" data-tab="principais">Pratos Principais</button>
+          <button class="menu__tab" data-tab="sobremesas">Sobremesas</button>
+        </div>
+
+        <div class="menu__content active" id="tab-entradas">
+          <div class="menu__grid">
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 15deg">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Entrada</span>
+                <h3 class="dish-card__name">Carpaccio de Carne com Trufas</h3>
+                <p class="dish-card__desc">Finas fatias de filé mignon com trufa negra, rúcula, parmesão e azeite extravirgem aromatizado.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 200deg">
+                <i class="fas fa-fish"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Entrada</span>
+                <h3 class="dish-card__name">Tartar de Salmão com Caviar</h3>
+                <p class="dish-card__desc">Salmão fresco temperado com limão siciliano, alcaparras e finalizado com caviar de truta.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 35deg">
+                <i class="fas fa-bread-slice"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Entrada</span>
+                <h3 class="dish-card__name">Bruschetta de Tomate Confit</h3>
+                <p class="dish-card__desc">Pão artesanal grelhado com tomate cereja confitado, manjericão fresco e burrata cremosa.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 280deg">
+                <i class="fas fa-seedling"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Entrada</span>
+                <h3 class="dish-card__name">Creme de Abóbora com Gengibre</h3>
+                <p class="dish-card__desc">Veloutée de abóbora japonesa com toque de gengibre fresco, creme de coco e crocante de sementes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu__content" id="tab-principais">
+          <div class="menu__grid">
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 0deg">
+                <i class="fas fa-drumstick-bite"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Prato Principal</span>
+                <h3 class="dish-card__name">Filé ao Molho de Vinho Tinto</h3>
+                <p class="dish-card__desc">Medalhão de filé mignon grelhado com molho reduzido de vinho Barolo, purê de batata trufado e legumes salteados.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 220deg">
+                <i class="fas fa-fish"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Prato Principal</span>
+                <h3 class="dish-card__name">Robalo no Sal com Ervas</h3>
+                <p class="dish-card__desc">Robalo inteiro assado em crosta de sal grosso e ervas aromáticas, com risoto de limão siciliano e alcachofra.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 300deg">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Prato Principal</span>
+                <h3 class="dish-card__name">Risoto de Funghi com Parmesão</h3>
+                <p class="dish-card__desc">Arroz arbóreo cremoso com mix de cogumelos frescos e secos, finalizado com parmesão 24 meses e manteiga de ervas.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 25deg">
+                <i class="fas fa-fire"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Prato Principal</span>
+                <h3 class="dish-card__name">Cordeiro Assado com Chimichurri</h3>
+                <p class="dish-card__desc">Carré de cordeiro marinado com ervas finas, assado lentamente e servido com chimichurri artesanal e polenta cremosa.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu__content" id="tab-sobremesas">
+          <div class="menu__grid">
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 340deg">
+                <i class="fas fa-ice-cream"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Sobremesa</span>
+                <h3 class="dish-card__name">Fondant de Chocolate Belga</h3>
+                <p class="dish-card__desc">Bolo quente de chocolate 70% cacau com coração líquido, sorvete de baunilha Madagascar e calda de framboesa.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 50deg">
+                <i class="fas fa-birthday-cake"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Sobremesa</span>
+                <h3 class="dish-card__name">Crème Brûlée à la Lavande</h3>
+                <p class="dish-card__desc">Tradicional creme francês perfumado com lavanda orgânica, com casquinha caramelizada e flores comestíveis.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 100deg">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Sobremesa</span>
+                <h3 class="dish-card__name">Tarte Tatin de Maçã</h3>
+                <p class="dish-card__desc">Torta francesa invertida com maçãs caramelizadas no forno, massa folhada amanteigada e chantilly de baunilha.</p>
+              </div>
+            </div>
+            <div class="dish-card">
+              <div class="dish-card__img-placeholder" style="--hue: 180deg">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="dish-card__body">
+                <span class="dish-card__tag">Sobremesa</span>
+                <h3 class="dish-card__name">Pavlova com Frutas Vermelhas</h3>
+                <p class="dish-card__desc">Merengue crocante por fora e cremoso por dentro, coberto com chantilly e mix de frutas vermelhas frescas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu__footer">
+          <p>Cardápios personalizados são desenvolvidos de acordo com a ocasião, temporada e preferências dos convidados.</p>
+          <a href="#contato" class="btn btn--primary">Solicitar cardápio personalizado</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== GALERIA ===================== -->
+    <section class="gallery" id="galeria">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Momentos & Criações</p>
+          <h2 class="section-title">Galeria</h2>
+          <p class="section-subtitle">Cada imagem conta uma história de sabor, arte e emoção.</p>
+        </div>
+
+        <div class="gallery__filters">
+          <button class="gallery__filter active" data-filter="all">Todos</button>
+          <button class="gallery__filter" data-filter="casamentos">Casamentos</button>
+          <button class="gallery__filter" data-filter="privados">Eventos Privados</button>
+          <button class="gallery__filter" data-filter="jantares">Jantares Exclusivos</button>
+          <button class="gallery__filter" data-filter="corporativos">Corporativos</button>
+          <button class="gallery__filter" data-filter="pratos">Pratos</button>
+          <button class="gallery__filter" data-filter="bastidores">Bastidores</button>
+        </div>
+
+        <div class="gallery__grid" id="galleryGrid">
+          <div class="gallery__item" data-category="casamentos">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Casamento – Mesa de Frios</span></div>
+          </div>
+          <div class="gallery__item gallery__item--large" data-category="pratos">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Apresentação de Prato</span></div>
+          </div>
+          <div class="gallery__item" data-category="jantares">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Jantar Privado</span></div>
+          </div>
+          <div class="gallery__item" data-category="bastidores">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Bastidores da Cozinha</span></div>
+          </div>
+          <div class="gallery__item" data-category="corporativos">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Evento Corporativo</span></div>
+          </div>
+          <div class="gallery__item" data-category="casamentos">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Bolo de Casamento</span></div>
+          </div>
+          <div class="gallery__item gallery__item--wide" data-category="pratos">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Montagem de Prato Especial</span></div>
+          </div>
+          <div class="gallery__item" data-category="privados">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Evento Privado</span></div>
+          </div>
+          <div class="gallery__item" data-category="bastidores">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Chef em Ação</span></div>
+          </div>
+          <div class="gallery__item" data-category="jantares">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Mesa Posta</span></div>
+          </div>
+          <div class="gallery__item" data-category="corporativos">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Coquetel Executivo</span></div>
+          </div>
+          <div class="gallery__item" data-category="casamentos">
+            <div class="gallery__placeholder"><i class="fas fa-camera"></i><span>Buffet de Casamento</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DEPOIMENTOS ===================== -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">O que dizem</p>
+          <h2 class="section-title">Experiências que Emocionam</h2>
+        </div>
+
+        <div class="testimonials__slider" id="testimonialsSlider">
+          <div class="testimonial-card active">
+            <div class="testimonial-card__stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-card__text">"O Cheff Lima transformou meu casamento em algo de outro mundo. Cada prato era uma obra de arte — bonito demais para comer e irresistível para não comer! Todos os convidados ainda comentam até hoje."</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar"><i class="fas fa-user"></i></div>
+              <div>
+                <strong>Camila Rodrigues</strong>
+                <span>Casamento – Joinville, SC</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-card__text">"Contratei o Chef Lima para meu aniversário de 40 anos e foi simplesmente incrível. A experiência de ter um chef profissional na minha casa, preparando tudo com aquela elegância, é algo que não tem preço."</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar"><i class="fas fa-user"></i></div>
+              <div>
+                <strong>Fernanda Oliveira</strong>
+                <span>Jantar Privado – Jaraguá do Sul, SC</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-card__text">"Nossa empresa contratou o Cheff Lima para um evento de relacionamento com clientes e o feedback foi unânime: o melhor evento que já fizemos. A gastronomia foi o diferencial que encantou a todos."</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar"><i class="fas fa-user"></i></div>
+              <div>
+                <strong>Ana Paula Schmitt</strong>
+                <span>Evento Corporativo – Blumenau, SC</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-card__text">"Chá de panela inesquecível! O Lima criou um menu temático com mini versões dos pratos preferidos dos noivos. Sofisticado, delicioso e com um toque de afeto que só ele tem."</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar"><i class="fas fa-user"></i></div>
+              <div>
+                <strong>Mariana Costa</strong>
+                <span>Chá de Panela – São Bento do Sul, SC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonials__controls">
+          <button class="testimonials__btn" id="prevTestimonial"><i class="fas fa-chevron-left"></i></button>
+          <div class="testimonials__dots" id="testimonialDots"></div>
+          <button class="testimonials__btn" id="nextTestimonial"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTATO ===================== -->
+    <section class="contact" id="contato">
+      <div class="container">
+        <div class="contact__grid">
+
+          <div class="contact__info">
+            <p class="section-eyebrow">Entre em Contato</p>
+            <h2 class="section-title">Vamos criar algo<br /><em>extraordinário juntos</em></h2>
+            <p class="contact__text">Conte-me sobre seu evento, o número de convidados, a data e suas preferências. Vou criar uma proposta gastronômica exclusiva para você.</p>
+
+            <div class="contact__channels">
+              <a href="https://wa.me/5547999999999" target="_blank" class="contact__channel contact__channel--whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                  <strong>WhatsApp</strong>
+                  <span>(47) 9 9999-9999</span>
+                </div>
+              </a>
+              <a href="https://instagram.com/chefflima" target="_blank" class="contact__channel">
+                <i class="fab fa-instagram"></i>
+                <div>
+                  <strong>Instagram</strong>
+                  <span>@chefflima</span>
+                </div>
+              </a>
+              <a href="mailto:contato@chefflima.com.br" class="contact__channel">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <strong>E-mail</strong>
+                  <span>contato@chefflima.com.br</span>
+                </div>
+              </a>
+              <a href="tel:+5547999999999" class="contact__channel">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <strong>Telefone</strong>
+                  <span>(47) 9 9999-9999</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="contact__region">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Atendimento no Norte de Santa Catarina e região</span>
+            </div>
+          </div>
+
+          <div class="contact__form-wrap">
+            <form class="contact__form" id="contactForm" novalidate>
+              <h3 class="contact__form-title">Solicite um Orçamento</h3>
+
+              <div class="form-group">
+                <label for="name">Seu nome</label>
+                <input type="text" id="name" name="name" placeholder="Como posso te chamar?" required />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">WhatsApp / Telefone</label>
+                <input type="tel" id="phone" name="phone" placeholder="(47) 9 9999-9999" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="service">Tipo de evento</label>
+                <select id="service" name="service">
+                  <option value="">Selecione o tipo de evento</option>
+                  <option value="jantar-privado">Jantar Privado</option>
+                  <option value="casamento">Casamento</option>
+                  <option value="corporativo">Evento Corporativo</option>
+                  <option value="aniversario">Aniversário</option>
+                  <option value="noivado">Noivado</option>
+                  <option value="cha-panela">Chá de Panela</option>
+                  <option value="chef-casa">Chef em Casa</option>
+                  <option value="consultoria">Consultoria Gastronômica</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="guests">Número de convidados</label>
+                <input type="number" id="guests" name="guests" placeholder="Ex: 30" min="1" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Conte sobre seu evento</label>
+                <textarea id="message" name="message" rows="4" placeholder="Data, local, preferências, restrições alimentares..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--full">
+                <i class="fab fa-whatsapp"></i> Enviar pelo WhatsApp
+              </button>
+              <p class="form-privacy">Suas informações são tratadas com total privacidade.</p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <span class="footer__logo">Cheff Lima</span>
+          <p class="footer__tagline">Gastronomia de Alto Padrão</p>
+          <p class="footer__desc">20 anos transformando momentos em experiências gastronômicas inesquecíveis no norte de Santa Catarina.</p>
+          <div class="footer__social">
+            <a href="https://instagram.com/chefflima" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/5547999999999" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://facebook.com/chefflima" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+
+        <div class="footer__links">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#sobre">Sobre o Chef</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#cardapio">Cardápio</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__services">
+          <h4>Serviços</h4>
+          <ul>
+            <li><a href="#servicos">Jantar Privado</a></li>
+            <li><a href="#servicos">Casamentos</a></li>
+            <li><a href="#servicos">Eventos Corporativos</a></li>
+            <li><a href="#servicos">Chef em Casa</a></li>
+            <li><a href="#servicos">Consultoria Gastronômica</a></li>
+            <li><a href="#servicos">Desenvolvimento de Cardápios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__contact">
+          <h4>Contato</h4>
+          <ul>
+            <li><i class="fab fa-whatsapp"></i> (47) 9 9999-9999</li>
+            <li><i class="fas fa-envelope"></i> contato@chefflima.com.br</li>
+            <li><i class="fab fa-instagram"></i> @chefflima</li>
+            <li><i class="fas fa-map-marker-alt"></i> Norte de SC e região</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>&copy; 2024 Cheff Lima. Todos os direitos reservados.</p>
+        <p>Gastronomia de Alto Padrão – Norte de Santa Catarina</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== FLOATING WHATSAPP ===================== -->
+  <a href="https://wa.me/5547999999999" class="whatsapp-float" target="_blank" aria-label="Fale pelo WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-float__tooltip">Fale comigo!</span>
+  </a>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

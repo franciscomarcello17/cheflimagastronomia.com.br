@@ -1,0 +1,19 @@
+{
+  "name": "cheff-lima",
+  "version": "1.0.0",
+  "description": "Site institucional do Cheff Lima – Gastronomia de Alto Padrão",
+  "scripts": {
+    "scss": "sass scss/main.scss css/main.css --style=compressed --watch",
+    "ts": "tsc --watch",
+    "build:scss": "sass scss/main.scss css/main.css --style=compressed",
+    "build:ts": "tsc",
+    "build": "npm run build:scss && npm run build:ts",
+    "dev": "concurrently \"npm run scss\" \"npm run ts\"",
+    "serve": "npx live-server --port=3000 --open=index.html"
+  },
+  "devDependencies": {
+    "sass": "^1.69.5",
+    "typescript": "^5.3.3",
+    "concurrently": "^8.2.2"
+  }
+}
