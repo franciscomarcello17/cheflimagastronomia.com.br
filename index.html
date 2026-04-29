@@ -1,28 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Anti-flash: aplica o tema salvo antes do CSS carregar -->
-  <script>(function(){var t=localStorage.getItem('chefflima-theme')||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}());</script>
-  <meta name="description" content="Cheff Lima – Chef profissional com 20 anos de experiência. Jantares privados, eventos, casamentos e consultoria gastronômica no norte de Santa Catarina." />
-  <meta name="keywords" content="chef profissional, jantar privado, eventos gastronômicos, chef santa catarina, gastronomia de alto padrão, Cheff Lima" />
+  <script>
+    (function(){
+      var t = localStorage.getItem('chefflima-theme') ||
+      (window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', t);
+    }());
+  </script>
+
+  <!-- SEO -->
+  <title>Cheff Lima | Chef Particular em Joinville SC</title>
+
+  <meta name="description"
+    content="Cheff Lima – Chef profissional em Joinville e norte de Santa Catarina. Jantares privados, eventos, casamentos e experiências gastronômicas exclusivas." />
+
+  <meta name="keywords"
+    content="chef particular Joinville, chef profissional Joinville, jantar privado Joinville, chef para eventos Joinville, gastronomia de alto padrão Santa Catarina, Cheff Lima" />
+
   <meta name="author" content="Cheff Lima" />
-  <meta property="og:title" content="Cheff Lima – Gastronomia de Alto Padrão" />
-  <meta property="og:description" content="Transforme seu evento em uma experiência gastronômica inesquecível." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./images/favicon.png" />
+
+  <!-- Open Graph (WhatsApp / Facebook / LinkedIn) -->
+  <meta property="og:title" content="Cheff Lima – Chef Particular em Joinville" />
+  <meta property="og:description" content="Transforme seu evento em uma experiência gastronômica inesquecível com o Cheff Lima." />
   <meta property="og:type" content="website" />
-  <title>Cheff Lima – Gastronomia de Alto Padrão</title>
+  <meta property="og:image" content="./images/chef-lima.png" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Twitter preview -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cheff Lima – Gastronomia de Alto Padrão" />
+  <meta name="twitter:description" content="Chef profissional em Joinville especializado em jantares privados e eventos." />
+  <meta name="twitter:image" content="./images/chef-lima.png" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/main.css" />
+
+  <!-- Schema SEO (Google entende que é um chef profissional) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Cheff Lima",
+    "jobTitle": "Chef de Cozinha",
+    "description": "Chef profissional especializado em jantares privados, eventos e gastronomia de alto padrão.",
+    "image": "./images/chef-lima.png",
+    "areaServed": {
+      "@type": "Place",
+      "name": "Joinville, Santa Catarina"
+    }
+  }
+  </script>
+
+</head>
 </head>
 <body>
 
@@ -62,12 +111,13 @@
       <div class="hero__bg"></div>
       <div class="hero__overlay"></div>
 
-      <!-- Photo placeholder -->
+      <!-- Foto do Chef -->
       <div class="hero__photo-wrapper">
-        <div class="hero__photo-placeholder">
-          <i class="fas fa-user-tie"></i>
-          <span>Foto do Chef</span>
-        </div>
+        <img 
+          src="./images/chef-lima.png" 
+          alt="Chef Lima" 
+          class="hero__photo"
+        />
       </div>
 
       <div class="hero__content container">
@@ -334,7 +384,7 @@
           <h2 class="cta-banner__title">Transforme seu evento em uma<br /><em>experiência gastronômica inesquecível</em></h2>
           <p class="cta-banner__text">Entre em contato agora e vamos criar juntos o menu perfeito para o seu momento especial.</p>
           <div class="cta-banner__actions">
-            <a href="https://wa.me/5547999999999" target="_blank" class="btn btn--whatsapp">
+            <a href="https://wa.me/554788175366" target="_blank" class="btn btn--whatsapp">
               <i class="fab fa-whatsapp"></i> Falar pelo WhatsApp
             </a>
             <a href="#contato" class="btn btn--outline-white">Ver todos os serviços</a>
@@ -645,14 +695,14 @@
             <p class="contact__text">Conte-me sobre seu evento, o número de convidados, a data e suas preferências. Vou criar uma proposta gastronômica exclusiva para você.</p>
 
             <div class="contact__channels">
-              <a href="https://wa.me/5547999999999" target="_blank" class="contact__channel contact__channel--whatsapp">
+              <a href="https://wa.me/554788175366" target="_blank" class="contact__channel contact__channel--whatsapp">
                 <i class="fab fa-whatsapp"></i>
                 <div>
                   <strong>WhatsApp</strong>
                   <span>(47) 9 9999-9999</span>
                 </div>
               </a>
-              <a href="https://instagram.com/chefflima" target="_blank" class="contact__channel">
+              <a href="https://www.instagram.com/chefflima/" target="_blank" class="contact__channel">
                 <i class="fab fa-instagram"></i>
                 <div>
                   <strong>Instagram</strong>
@@ -748,8 +798,8 @@
           <p class="footer__tagline">Gastronomia de Alto Padrão</p>
           <p class="footer__desc">20 anos transformando momentos em experiências gastronômicas inesquecíveis no norte de Santa Catarina.</p>
           <div class="footer__social">
-            <a href="https://instagram.com/chefflima" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/5547999999999" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/chefflima/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/554788175366" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             <a href="https://facebook.com/chefflima" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
@@ -781,7 +831,7 @@
         <div class="footer__contact">
           <h4>Contato</h4>
           <ul>
-            <li><i class="fab fa-whatsapp"></i> (47) 9 9999-9999</li>
+            <li><i class="fab fa-whatsapp"></i> (47) 9 8817-5366</li>
             <li><i class="fas fa-envelope"></i> contato@chefflima.com.br</li>
             <li><i class="fab fa-instagram"></i> @chefflima</li>
             <li><i class="fas fa-map-marker-alt"></i> Norte de SC e região</li>
@@ -797,7 +847,7 @@
   </footer>
 
   <!-- ===================== FLOATING WHATSAPP ===================== -->
-  <a href="https://wa.me/5547999999999" class="whatsapp-float" target="_blank" aria-label="Fale pelo WhatsApp">
+  <a href="https://wa.me/554788175366" class="whatsapp-float" target="_blank" aria-label="Fale pelo WhatsApp">
     <i class="fab fa-whatsapp"></i>
     <span class="whatsapp-float__tooltip">Fale comigo!</span>
   </a>
