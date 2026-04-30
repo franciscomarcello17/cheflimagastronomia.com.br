@@ -148,45 +148,206 @@ const counterObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll<HTMLElement>('[data-count]').forEach(el => counterObserver.observe(el));
 
 // =====================================================
-// MENU TABS
+// MENU + GALLERY (data-driven carousels)
 // =====================================================
-const menuTabs     = document.querySelectorAll<HTMLButtonElement>('.menu__tab');
-const menuContents = document.querySelectorAll<HTMLElement>('.menu__content');
+interface MenuSegment { id: string; label: string; tag: string; }
+interface MenuDish    { title: string; description: string; image: string; segment: string; }
+interface MenuData    { segments: MenuSegment[]; dishes: MenuDish[]; }
 
-menuTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const target = tab.getAttribute('data-tab');
-    if (!target) return;
-    menuTabs.forEach(t => t.classList.remove('active'));
-    menuContents.forEach(c => c.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(`tab-${target}`)?.classList.add('active');
+interface GalleryCategory { id: string; label: string; }
+interface GalleryItem     { title: string; description?: string; image: string; category: string; }
+interface GalleryData     { categories: GalleryCategory[]; items: GalleryItem[]; }
+
+function escHtml(str: string): string {
+  return String(str).replace(/[&<>"']/g, (c: string) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  } as Record<string, string>)[c]);
+}
+
+function buildCarousel(slidesHTML: string, extraClass = ''): string {
+  return `
+    <div class="carousel ${extraClass}">
+      <button class="carousel__btn carousel__btn--prev" aria-label="Anterior" type="button">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="carousel__viewport">
+        <div class="carousel__track">${slidesHTML}</div>
+      </div>
+      <button class="carousel__btn carousel__btn--next" aria-label="Próximo" type="button">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  `;
+}
+
+function bindCarousel(root: HTMLElement): void {
+  const viewport = root.querySelector<HTMLElement>('.carousel__viewport');
+  const prev     = root.querySelector<HTMLButtonElement>('.carousel__btn--prev');
+  const next     = root.querySelector<HTMLButtonElement>('.carousel__btn--next');
+  if (!viewport || !prev || !next) return;
+
+  function updateState(): void {
+    const max = viewport!.scrollWidth - viewport!.clientWidth - 2;
+    prev!.disabled = viewport!.scrollLeft <= 0;
+    next!.disabled = viewport!.scrollLeft >= max;
+  }
+
+  function step(dir: number): void {
+    viewport!.scrollBy({ left: dir * viewport!.clientWidth * 0.85, behavior: 'smooth' });
+  }
+
+  prev.addEventListener('click', () => step(-1));
+  next.addEventListener('click', () => step(1));
+  viewport.addEventListener('scroll', updateState, { passive: true });
+  window.addEventListener('resize', updateState);
+
+  let startX = 0, scrolling = false;
+  viewport.addEventListener('touchstart', (e: TouchEvent) => {
+    startX = e.touches[0].clientX; scrolling = true;
+  }, { passive: true });
+  viewport.addEventListener('touchend', (e: TouchEvent) => {
+    if (!scrolling) return;
+    scrolling = false;
+    const dx = startX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 60) step(dx > 0 ? 1 : -1);
   });
-});
 
-// =====================================================
-// GALLERY FILTER
-// =====================================================
-const galleryFilters = document.querySelectorAll<HTMLButtonElement>('.gallery__filter');
-const galleryItems   = document.querySelectorAll<HTMLElement>('.gallery__item');
+  requestAnimationFrame(updateState);
+}
 
-galleryFilters.forEach(filter => {
-  filter.addEventListener('click', () => {
-    const category = filter.getAttribute('data-filter');
-    galleryFilters.forEach(f => f.classList.remove('active'));
-    filter.classList.add('active');
+function dishCardHTML(dish: MenuDish, segmentTag: string): string {
+  return `
+    <article class="carousel__slide">
+      <div class="dish-card">
+        <div class="dish-card__img-wrap">
+          <img class="dish-card__img" src="${escHtml(dish.image)}" alt="${escHtml(dish.title)}" loading="lazy" />
+        </div>
+        <div class="dish-card__body">
+          <span class="dish-card__tag">${escHtml(segmentTag || dish.segment)}</span>
+          <h3 class="dish-card__name">${escHtml(dish.title)}</h3>
+          <p class="dish-card__desc">${escHtml(dish.description)}</p>
+        </div>
+      </div>
+    </article>
+  `;
+}
 
-    galleryItems.forEach(item => {
-      const visible = category === 'all' || item.getAttribute('data-category') === category;
-      item.classList.toggle('hidden', !visible);
-      if (visible) {
-        item.style.animation = 'none';
-        item.offsetHeight;
-        item.style.animation = 'fadeSlide 0.4s ease forwards';
-      }
+function galleryItemHTML(item: GalleryItem): string {
+  const caption = item.title ? `<div class="gallery__caption">${escHtml(item.title)}</div>` : '';
+  return `
+    <article class="carousel__slide" data-category="${escHtml(item.category)}">
+      <div class="gallery__item">
+        <img class="gallery__img" src="${escHtml(item.image)}" alt="${escHtml(item.title || 'Imagem da galeria')}" loading="lazy" />
+        ${caption}
+      </div>
+    </article>
+  `;
+}
+
+async function loadJSON<T>(path: string): Promise<T> {
+  const res = await fetch(path, { cache: 'no-cache' });
+  if (!res.ok) throw new Error(`Falha ao carregar ${path}: ${res.status}`);
+  return res.json() as Promise<T>;
+}
+
+function observeReveal(els: NodeListOf<Element> | Element[]): void {
+  if (typeof revealObserver === 'undefined') return;
+  els.forEach(el => {
+    (el as HTMLElement).setAttribute('data-reveal', '');
+    revealObserver.observe(el);
+  });
+}
+
+// ----- MENU -----
+async function renderMenu(): Promise<void> {
+  const tabsRoot      = document.getElementById('menuTabs');
+  const carouselsRoot = document.getElementById('menuCarousels');
+  if (!tabsRoot || !carouselsRoot) return;
+
+  let data: MenuData;
+  try {
+    data = await loadJSON<MenuData>('data/menu.json');
+  } catch (err) {
+    console.error(err);
+    carouselsRoot.innerHTML = `<p style="text-align:center;color:var(--fg-2)">Não foi possível carregar o cardápio.</p>`;
+    return;
+  }
+
+  const segments = data.segments || [];
+  const dishes   = data.dishes   || [];
+  if (!segments.length) return;
+
+  tabsRoot.innerHTML = segments.map((seg, i) => `
+    <button class="menu__tab ${i === 0 ? 'active' : ''}" data-tab="${escHtml(seg.id)}" type="button">
+      ${escHtml(seg.label)}
+    </button>
+  `).join('');
+
+  carouselsRoot.innerHTML = segments.map(seg => {
+    const segDishes = dishes.filter(d => d.segment === seg.id);
+    const slides = segDishes.map(d => dishCardHTML(d, seg.tag)).join('');
+    return `<div class="menu__carousel" data-segment="${escHtml(seg.id)}">${buildCarousel(slides)}</div>`;
+  }).join('');
+
+  carouselsRoot.setAttribute('data-active', segments[0].id);
+
+  tabsRoot.querySelectorAll<HTMLButtonElement>('.menu__tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-tab') || '';
+      tabsRoot.querySelectorAll<HTMLButtonElement>('.menu__tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      carouselsRoot.setAttribute('data-active', target);
     });
   });
-});
+
+  carouselsRoot.querySelectorAll<HTMLElement>('.carousel').forEach(bindCarousel);
+  observeReveal(carouselsRoot.querySelectorAll('.dish-card'));
+}
+
+// ----- GALLERY -----
+async function renderGallery(): Promise<void> {
+  const filtersRoot  = document.getElementById('galleryFilters');
+  const carouselRoot = document.getElementById('galleryCarousel');
+  if (!filtersRoot || !carouselRoot) return;
+
+  let data: GalleryData;
+  try {
+    data = await loadJSON<GalleryData>('data/gallery.json');
+  } catch (err) {
+    console.error(err);
+    carouselRoot.innerHTML = `<p style="text-align:center;color:var(--fg-2)">Não foi possível carregar a galeria.</p>`;
+    return;
+  }
+
+  const categories = data.categories || [{ id: 'all', label: 'Todos' }];
+  const items      = data.items      || [];
+
+  filtersRoot.innerHTML = categories.map((cat, i) => `
+    <button class="gallery__filter ${i === 0 ? 'active' : ''}" data-filter="${escHtml(cat.id)}" type="button">
+      ${escHtml(cat.label)}
+    </button>
+  `).join('');
+
+  function paint(filter: string): void {
+    const visible = filter === 'all' ? items : items.filter(i => i.category === filter);
+    const slides = visible.map(galleryItemHTML).join('') ||
+      `<p style="padding:2rem;color:var(--fg-2)">Nenhuma imagem nesta categoria.</p>`;
+    carouselRoot!.innerHTML = buildCarousel(slides, 'gallery__inner-carousel');
+    const carousel = carouselRoot!.querySelector<HTMLElement>('.carousel');
+    if (carousel) bindCarousel(carousel);
+    observeReveal(carouselRoot!.querySelectorAll('.gallery__item'));
+  }
+
+  paint('all');
+
+  filtersRoot.querySelectorAll<HTMLButtonElement>('.gallery__filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      filtersRoot.querySelectorAll<HTMLButtonElement>('.gallery__filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      paint(btn.getAttribute('data-filter') || 'all');
+    });
+  });
+}
 
 // =====================================================
 // TESTIMONIALS SLIDER
@@ -341,3 +502,6 @@ window.addEventListener('scroll', () => {
 // =====================================================
 updateActiveNav();
 toggleBackToTop();
+
+renderMenu();
+renderGallery();

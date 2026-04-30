@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv caprese.jpg barca-sushi-1.jpg camarao-catupiry.jpg entradas/)",
+      "Bash(mv porcheta.jpg camarao-molho.jpg file-mignon-papardelli-cogumelo.jpg frutos-mar.jpg medalhao-mignon-pure-aipim.jpg bife-role-molho-roti.jpg bacalhau-portuguesa.jpg principais/)",
+      "Bash(mv sorvete-caju.jpg cheesecake-blueberry.jpg petit-gateau-1.jpg petit-gateau-2.jpg petit-gateau-3.jpg grand-gateau.jpg sobremesas/)",
+      "Bash(npx --no-install tsc --noEmit)",
+      "Bash(node --check \"c:/Users/11550/Documents/GitHub/cheff-lima/js/main.js\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('data/menu.json','utf8'\\)\\); JSON.parse\\(require\\('fs'\\).readFileSync\\('data/gallery.json','utf8'\\)\\); console.log\\('JSON OK'\\)\")",
+      "Bash(command -v python3)",
+      "Bash(command -v python)",
+      "Bash(command -v py)",
+      "Bash(python3 -m http.server 8765 --bind 127.0.0.1)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8765/index.html)",
+      "Bash(curl -s http://127.0.0.1:8765/data/menu.json)",
+      "Bash(curl -s http://127.0.0.1:8765/data/gallery.json)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8765/images/entradas/caprese.jpg)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8765/images/principais/porcheta.jpg)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8765/images/sobremesas/grand-gateau.jpg)",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"http.server 8765\")",
+      "Bash(curl -s -o /dev/null -w \"html:%{http_code}\\\\n\" http://127.0.0.1:8765/index.html)",
+      "Bash(curl -s -o /dev/null -w \"css:%{http_code}\\\\n\" http://127.0.0.1:8765/css/main.css)",
+      "Bash(curl -s -o /dev/null -w \"js:%{http_code}\\\\n\" http://127.0.0.1:8765/js/main.js)",
+      "Bash(curl -s -o /dev/null -w \"menu.json:%{http_code}\\\\n\" http://127.0.0.1:8765/data/menu.json)",
+      "Bash(curl -s -o /dev/null -w \"gallery.json:%{http_code}\\\\n\" http://127.0.0.1:8765/data/gallery.json)",
+      "Bash(curl -s http://127.0.0.1:8765/index.html)"
+    ]
+  }
+}

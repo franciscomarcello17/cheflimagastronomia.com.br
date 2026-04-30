@@ -1,0 +1,106 @@
+{
+  "categories": [
+    { "id": "all",     "label": "Todos" },
+    { "id": "entradas",   "label": "Entradas" },
+    { "id": "principais", "label": "Pratos Principais" },
+    { "id": "sobremesas", "label": "Sobremesas" }
+  ],
+  "items": [
+    {
+      "title": "Caprese Italiana",
+      "description": "Apresentação clássica com mozzarella di bufala, tomates frescos e manjericão.",
+      "image": "images/entradas/caprese.jpg",
+      "category": "entradas"
+    },
+    {
+      "title": "Barca de Sushi",
+      "description": "Combinado em barca japonesa preparada à la minute pelo chef.",
+      "image": "images/entradas/barca-sushi-1.jpg",
+      "category": "entradas"
+    },
+    {
+      "title": "Camarão com Catupiry",
+      "description": "Crocância dourada com recheio cremoso e finalização do chef.",
+      "image": "images/entradas/camarao-catupiry.jpg",
+      "category": "entradas"
+    },
+    {
+      "title": "Porchetta",
+      "description": "Pernil italiano de pele crocante e ervas aromáticas.",
+      "image": "images/principais/porcheta.jpg",
+      "category": "principais"
+    },
+    {
+      "title": "Camarão ao Champagne",
+      "description": "Salteado em manteiga noisette com toque sofisticado de champagne.",
+      "image": "images/principais/camarao-molho.jpg",
+      "category": "principais"
+    },
+    {
+      "title": "Filé com Pappardelle",
+      "description": "Filé mignon ao molho de cogumelos selvagens sobre massa artesanal.",
+      "image": "images/principais/file-mignon-papardelli-cogumelo.jpg",
+      "category": "principais"
+    },
+    {
+      "title": "Frutos do Mar Flambados",
+      "description": "Mistura cremosa de mariscos finalizada com flambagem ao conhaque.",
+      "image": "images/principais/frutos-mar.jpg",
+      "category": "principais"
+    },
+    {
+      "title": "Medalhão com Tutano",
+      "description": "Filé mignon com tutano e purê cremoso de mandioquinha.",
+      "image": "images/principais/medalhao-mignon-pure-aipim.jpg",
+      "category": "principais"
+    },
+    {
+      "title": "Bife Rolê ao Molho Rôti",
+      "description": "Receita tradicional com molho encorpado, purê e arroz.",
+      "image": "images/principais/bife-role-molho-roti.jpg",
+      "category": "principais"
+    },
+    {
+      "title": "Bacalhau à Portuguesa",
+      "description": "Lombo confitado com batatas ao murro e legumes assados.",
+      "image": "images/principais/bacalhau-portuguesa.jpg",
+      "category": "principais"
+    },
+    {
+      "title": "Sorvete de Cajú",
+      "description": "Sobremesa autoral com cajuína, castanha e morango.",
+      "image": "images/sobremesas/sorvete-caju.jpg",
+      "category": "sobremesas"
+    },
+    {
+      "title": "Cheesecake de Blueberry",
+      "description": "Cremosidade da baunilha com geleia artesanal de blueberry.",
+      "image": "images/sobremesas/cheesecake-blueberry.jpg",
+      "category": "sobremesas"
+    },
+    {
+      "title": "Petit Gâteau ao Leite",
+      "description": "Coração líquido de chocolate ao leite com sorvete de baunilha.",
+      "image": "images/sobremesas/petit-gateau-1.jpg",
+      "category": "sobremesas"
+    },
+    {
+      "title": "Petit Gâteau Meio Amargo",
+      "description": "Chocolate 70% com fios de caramelo crocante.",
+      "image": "images/sobremesas/petit-gateau-2.jpg",
+      "category": "sobremesas"
+    },
+    {
+      "title": "Petit Gâteau de Pistache",
+      "description": "Chocolate branco com recheio de pistache e crumble de avelã.",
+      "image": "images/sobremesas/petit-gateau-3.jpg",
+      "category": "sobremesas"
+    },
+    {
+      "title": "Grand Gâteau",
+      "description": "Versão ampliada do petit gâteau, com dois sabores de sorvete.",
+      "image": "images/sobremesas/grand-gateau.jpg",
+      "category": "sobremesas"
+    }
+  ]
+}

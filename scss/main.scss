@@ -1067,13 +1067,6 @@ input, textarea, select { font-family: inherit; }
     &.active { display: block; }
   }
 
-  &__grid {
-    @include grid(repeat(4, 1fr), 1.5rem);
-
-    @include respond(lg) { grid-template-columns: repeat(2, 1fr); }
-    @include respond(sm) { grid-template-columns: 1fr; }
-  }
-
   &__footer {
     text-align: center;
     margin-top: 3rem;
@@ -1086,6 +1079,16 @@ input, textarea, select { font-family: inherit; }
       margin-bottom: 1.5rem;
     }
   }
+
+  &__carousels {
+    .menu__carousel { display: none; }
+
+    &[data-active="entradas"]   .menu__carousel[data-segment="entradas"],
+    &[data-active="principais"] .menu__carousel[data-segment="principais"],
+    &[data-active="sobremesas"] .menu__carousel[data-segment="sobremesas"] {
+      display: flex;
+    }
+  }
 }
 
 .dish-card {
@@ -1094,31 +1097,35 @@ input, textarea, select { font-family: inherit; }
   border-radius: $radius-md;
   overflow: hidden;
   transition: all $transition;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     border-color: rgba($gold, 0.3);
     transform: translateY(-4px);
     box-shadow: $shadow-md;
 
-    .dish-card__img-placeholder { filter: brightness(1.2); }
+    .dish-card__img { filter: brightness(1.1); transform: scale(1.04); }
   }
 
-  &__img-placeholder {
-    height: 160px;
-    background: linear-gradient(
-      135deg,
-      hsla(var(--hue, 30deg), 40%, 15%, 0.8),
-      hsla(var(--hue, 30deg), 20%, 8%, 0.9)
-    );
-    @include flex(center, center);
+  &__img-wrap { overflow: hidden; }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background: linear-gradient(135deg, rgba($black, 0.6), rgba($wine-dark, 0.4));
+    transition: transform $transition-slow, filter $transition;
+  }
+
+  &__body {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    color: rgba($gold, 0.35);
-    font-size: 2rem;
-    transition: filter $transition;
   }
-
-  &__body { padding: 1.25rem; }
 
   &__tag {
     font-size: 0.65rem;
@@ -1179,74 +1186,120 @@ input, textarea, select { font-family: inherit; }
     }
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 220px;
-    gap: 0.875rem;
-
-    @include respond(lg) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 180px;
-    }
-
-    @include respond(md) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include respond(sm) {
-      grid-template-columns: 1fr;
-      grid-auto-rows: 200px;
-    }
-  }
-
   &__item {
+    position: relative;
     border-radius: $radius-md;
     overflow: hidden;
     cursor: pointer;
     transition: all $transition;
-
-    &--large {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-
-    &--wide { grid-column: span 2; }
+    height: 100%;
 
     &:hover {
       transform: scale(1.02);
       box-shadow: $shadow-lg;
       z-index: 1;
 
-      .gallery__placeholder { filter: brightness(1.2); }
+      .gallery__img { filter: brightness(1.15); transform: scale(1.05); }
+      .gallery__caption { opacity: 1; transform: translateY(0); }
     }
-
-    &.hidden { display: none; }
   }
 
-  &__placeholder {
+  &__img {
+    display: block;
     width: 100%;
     height: 100%;
+    object-fit: cover;
     background: linear-gradient(135deg, rgba($black, 0.9), rgba($wine-dark, 0.6));
-    @include flex(center, center);
-    flex-direction: column;
-    gap: 0.75rem;
-    color: rgba($gold, 0.3);
-    font-size: 2rem;
-    border: 1px solid rgba($gold, 0.1);
-    border-radius: inherit;
-    transition: filter $transition;
-
-    span {
-      font-family: $font-serif;
-      font-size: 0.8rem;
-      font-style: italic;
-      color: rgba($gold, 0.4);
-      letter-spacing: 0.05em;
-      text-align: center;
-      padding: 0 1rem;
-    }
+    transition: transform $transition-slow, filter $transition;
   }
+
+  &__caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 1rem 1rem 0.9rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.0) 100%);
+    color: $white;
+    font-family: $font-serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    letter-spacing: 0.03em;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity $transition, transform $transition;
+  }
+}
+
+// =====================================================
+// CAROUSEL (menu + gallery shared)
+// =====================================================
+.carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__viewport {
+    flex: 1;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0.25rem 0.25rem 1rem;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  &__track {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  &__slide {
+    flex: 0 0 calc((100% - 3.75rem) / 4);
+    scroll-snap-align: start;
+    min-width: 0;
+
+    @include respond(lg) { flex: 0 0 calc((100% - 2.5rem) / 3); }
+    @include respond(md) { flex: 0 0 calc((100% - 1.25rem) / 2); }
+    @include respond(sm) { flex: 0 0 88%; }
+  }
+
+  &__btn {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba($gold, 0.3);
+    background: rgba($white, 0.07);
+    color: $gold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    @include flex(center, center);
+    transition: all $transition;
+    box-shadow: $shadow-sm;
+
+    &:hover:not(:disabled) {
+      background: rgba($gold, 0.15);
+      border-color: $gold;
+      transform: scale(1.06);
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    @include respond(sm) { width: 40px; height: 40px; }
+  }
+}
+
+.gallery__carousel .carousel__slide {
+  height: 320px;
+
+  @include respond(md) { height: 260px; }
+  @include respond(sm) { height: 240px; }
 }
 
 // =====================================================
@@ -1782,14 +1835,6 @@ input, textarea, select { font-family: inherit; }
 
   .service-card:hover, .dish-card:hover {
     box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 0 0 1px rgba($gold, 0.2);
-  }
-
-  // Gallery placeholders
-  .gallery__placeholder {
-    background: linear-gradient(135deg, rgba(200,195,185,0.55), rgba(107,39,55,0.12));
-    border-color: rgba($gold, 0.18);
-
-    span, i { color: rgba(107,39,55,0.45); }
   }
 
   // About photo placeholder
