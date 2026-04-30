@@ -112,6 +112,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 body {
@@ -462,6 +463,14 @@ input, textarea, select { font-family: inherit; }
   bottom: 0;
   width: 55%;
   z-index: 0;
+  overflow: hidden;
+}
+
+.hero__photo-wrapper .hero__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .hero__photo-placeholder {
@@ -493,6 +502,37 @@ input, textarea, select { font-family: inherit; }
   padding: 2rem 0;
 }
 
+/* ---- Availability badge ---- */
+.hero__availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(37,211,102,0.12);
+  border: 1px solid rgba(37,211,102,0.35);
+  color: #2ecc71;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.875rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1.25rem;
+}
+
+.hero__availability-dot {
+  width: 7px;
+  height: 7px;
+  background: #2ecc71;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: dotPulse 2s ease infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.45; transform: scale(0.75); }
+}
+
 .hero__eyebrow {
   font-size: 0.75rem;
   font-weight: 600;
@@ -511,6 +551,12 @@ input, textarea, select { font-family: inherit; }
   width: 40px;
   height: 1px;
   background: var(--gold);
+}
+
+.mobile-br { display: none; }
+
+@media (max-width: 767px) {
+  .mobile-br { display: block; }
 }
 
 .hero__title {
@@ -689,7 +735,7 @@ input, textarea, select { font-family: inherit; }
 .about__quote-card {
   position: absolute;
   bottom: -2rem;
-  left: -2rem;
+  left: -1.25rem;
   background: var(--bg-soft);
   border: 1px solid rgba(201,168,76,0.25);
   border-radius: var(--radius-md);
@@ -722,7 +768,23 @@ input, textarea, select { font-family: inherit; }
   font-style: normal;
 }
 
-.about__visual { position: relative; }
+.about__visual {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: visible;
+}
+
+.about__visual > img {
+  width: 100%;
+  max-height: 600px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(201,168,76,0.18);
+  box-shadow: var(--shadow-lg);
+  display: block;
+}
+
 .about__content { padding-left: 1rem; }
 
 .about__text {
@@ -911,6 +973,7 @@ input, textarea, select { font-family: inherit; }
   border-radius: 10px;
 }
 
+.service-card__media img,
 .service-card__media video {
   width: 100%;
   height: 100%;
@@ -1193,6 +1256,8 @@ input, textarea, select { font-family: inherit; }
   padding: 0.25rem 0.25rem 1rem;
   width: 100%;
   max-width: 100%;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .carousel__viewport::-webkit-scrollbar { display: none; }
@@ -1357,16 +1422,6 @@ input, textarea, select { font-family: inherit; }
   }
 }
 
-/* Container Pai - Garantia de não transbordamento */
-.carousel-container,
-.menu__carousels,
-.gallery__carousel {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
 /* Garantir que todos os elementos respeitem o box-sizing */
 *,
 *::before,
@@ -1374,10 +1429,14 @@ input, textarea, select { font-family: inherit; }
   box-sizing: border-box;
 }
 
-/* Correção específica para o container do menu */
-.menu__carousels {
+/* Contenção de carrosseis — sem overflow: visible em nenhum nível */
+.carousel-container,
+.menu__carousels,
+.gallery__carousel {
   width: 100%;
-  overflow: visible;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .menu__carousel {
@@ -1392,26 +1451,125 @@ input, textarea, select { font-family: inherit; }
   width: 100%;
 }
 
-/* Correção para o container da galeria */
-.gallery__carousel {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
+/* Seções isoladas — sem vazamento horizontal.
+   .menu e .gallery excluídos: overflow-x: hidden nos pais bloqueia
+   o scroll tátil dos carrosseis no iOS Safari. Os containers internos
+   (.menu__carousels, .gallery__carousel) já contêm o overflow. */
+.badges,
+.services,
+.cta-banner,
+.how-it-works,
+.testimonials,
+.contact,
+.footer {
+  overflow-x: hidden;
 }
 
-/* Ajuste de padding/margin do body/html para mobile */
-@media (max-width: 767px) {
-  body {
-    overflow-x: hidden;
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  .container,
-  .main-content {
-    overflow-x: hidden;
-    padding-left: 15px;
-    padding-right: 15px;
+/* =====================================================
+   HOW IT WORKS
+   ===================================================== */
+.how-it-works {
+  padding: 6rem 0;
+  background: var(--bg-soft);
+  border-top: 1px solid rgba(201,168,76,0.08);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+
+.how-it-works__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.how-step {
+  text-align: center;
+  padding: 2.5rem 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition);
+  position: relative;
+}
+
+.how-step:hover {
+  border-color: rgba(201,168,76,0.35);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.how-step__number {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.22;
+  margin-bottom: 0.5rem;
+}
+
+.how-step__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.25rem;
+  background: rgba(201,168,76,0.08);
+  border: 1.5px solid rgba(201,168,76,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.5rem;
+  transition: all var(--transition);
+}
+
+.how-step:hover .how-step__icon {
+  background: rgba(201,168,76,0.15);
+  border-color: var(--gold);
+}
+
+.how-step h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 0.75rem;
+}
+
+.how-step p {
+  font-size: 0.875rem;
+  color: var(--fg-2);
+  line-height: 1.75;
+}
+
+.how-it-works__cta {
+  text-align: center;
+}
+
+.how-it-works__guarantee {
+  font-size: 0.82rem;
+  color: var(--fg-2);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.how-it-works__guarantee i {
+  color: var(--gold);
+}
+
+@media (max-width: 768px) {
+  .how-it-works__steps {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -1825,6 +1983,12 @@ input, textarea, select { font-family: inherit; }
 /* =====================================================
    FLOATING WHATSAPP
    ===================================================== */
+@keyframes waPulse {
+  0%   { box-shadow: 0 4px 24px rgba(37,211,102,0.5), 0 0 0 0 rgba(37,211,102,0.35); }
+  70%  { box-shadow: 0 4px 24px rgba(37,211,102,0.5), 0 0 0 18px rgba(37,211,102,0); }
+  100% { box-shadow: 0 4px 24px rgba(37,211,102,0.5), 0 0 0 0 rgba(37,211,102,0); }
+}
+
 .whatsapp-float {
   position: fixed;
   bottom: 2rem;
@@ -1840,8 +2004,9 @@ input, textarea, select { font-family: inherit; }
   font-size: 1.75rem;
   box-shadow: 0 4px 24px rgba(37,211,102,0.5);
   z-index: 900;
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition);
   text-decoration: none;
+  animation: waPulse 2.5s ease-out infinite;
 }
 
 .whatsapp-float:hover {
@@ -2110,10 +2275,13 @@ input, textarea, select { font-family: inherit; }
 
 /* Medium (≤ 768px) */
 @media (max-width: 768px) {
+  /* Hero — esconde foto do chef no mobile */
+  .hero__photo-wrapper { display: none; }
+
   /* Hero — tablet portrait */
   .hero__eyebrow::before { display: none; }
 
-  .hero__overlay { background: rgba(10,10,10,0.68); }
+  .hero__overlay { background: rgba(10,10,10,0.55); }
 
   .hero__title { font-size: clamp(2.2rem, 9vw, 3.2rem); }
 
@@ -2144,17 +2312,23 @@ input, textarea, select { font-family: inherit; }
   .whatsapp-float { bottom: 1.5rem; right: 1.5rem; width: 54px; height: 54px; font-size: 1.5rem; }
   .back-to-top { bottom: 1.5rem; left: 1.5rem; }
 
-  /* Hero — mobile */
+  /* Hero — mobile: centraliza o conteúdo sem foto */
   .hero {
     min-height: 100svh;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     padding-top: 80px;
     padding-bottom: 4rem;
   }
 
   .hero__overlay {
-    background: rgba(10,10,10,0.55);
+    background: rgba(10,10,10,0.72);
   }
+
+  .hero__availability { justify-content: center; }
+
+  .hero__eyebrow { justify-content: center; }
 
   .hero__content {
     max-width: 100%;

@@ -194,15 +194,20 @@ function bindCarousel(root) {
   viewport.addEventListener('scroll', updateState, { passive: true });
   window.addEventListener('resize', updateState);
 
-  // Touch swipe (in addition to native scroll, helps consistency)
-  let startX = 0, scrolling = false;
-  viewport.addEventListener('touchstart', e => { startX = e.touches[0].clientX; scrolling = true; }, { passive: true });
-  viewport.addEventListener('touchend',   e => {
-    if (!scrolling) return;
-    scrolling = false;
+  // Touch swipe — só aciona o carrossel se o movimento for primariamente horizontal
+  let startX = 0, startY = 0;
+  viewport.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+  viewport.addEventListener('touchend', e => {
     const dx = startX - e.changedTouches[0].clientX;
-    if (Math.abs(dx) > 60) step(dx > 0 ? 1 : -1);
-  });
+    const dy = startY - e.changedTouches[0].clientY;
+    // Só avança o slide se o gesto for mais horizontal do que vertical
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      step(dx > 0 ? 1 : -1);
+    }
+  }, { passive: true });
 
   requestAnimationFrame(updateState);
 }
@@ -403,16 +408,20 @@ if (slider) {
   slider.addEventListener('mouseenter', () => clearInterval(testimonialTimer));
   slider.addEventListener('mouseleave', startAutoSlide);
 
-  // Touch swipe
-  let touchStartX = 0;
-  slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  // Touch swipe — só muda slide se o gesto for primariamente horizontal
+  let touchStartX = 0, touchStartY = 0;
+  slider.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
   slider.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      showTestimonial(currentTestimonial + (diff > 0 ? 1 : -1));
+    const dx = touchStartX - e.changedTouches[0].clientX;
+    const dy = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      showTestimonial(currentTestimonial + (dx > 0 ? 1 : -1));
       resetAutoSlide();
     }
-  });
+  }, { passive: true });
 }
 
 // =====================================================
