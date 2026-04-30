@@ -47,16 +47,30 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://chefflima.com.br/" />
 
-  <!-- Google Fonts -->
+  <!-- Preload: hero image (LCP crítico) -->
+  <link rel="preload" as="image" href="./images/chef-lima.png" fetchpriority="high" />
+
+  <!-- DNS + preconnect para recursos externos -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Google Fonts — não bloqueia renderização -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    onload="this.rel='stylesheet'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <!-- Font Awesome — carrega sem bloquear renderização -->
+  <link rel="preload" as="style"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    onload="this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </noscript>
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/main.css" />
@@ -133,10 +147,12 @@
 
       <!-- Foto do Chef -->
       <div class="hero__photo-wrapper">
-        <img 
-          src="./images/chef-lima.png" 
-          alt="Chef Lima" 
+        <img
+          src="./images/chef-lima.png"
+          alt="Chef Lima"
           class="hero__photo"
+          fetchpriority="high"
+          decoding="sync"
         />
       </div>
 
@@ -201,10 +217,12 @@
         <div class="about__grid">
 
           <div class="about__visual">
-            <img 
-              src="./images/chef-lima.png" 
-              alt="Chef Lima" 
+            <img
+              src="./images/chef-lima.png"
+              alt="Chef Lima"
               class="hero__photo"
+              loading="lazy"
+              decoding="async"
             />
             <div class="about__quote-card">
               <i class="fas fa-quote-left"></i>
@@ -282,9 +300,8 @@
             </div>
 
             <div class="service-card__media">
-              <video autoplay muted loop playsinline>
+              <video autoplay muted loop playsinline preload="none">
                 <source src="./videos/casamento.mp4" type="video/mp4">
-                Seu navegador não suporta vídeo.
               </video>
             </div>
 
@@ -310,7 +327,7 @@
             </div>
 
             <div class="service-card__media">
-              <img src="./images/corporativo/corporativo.jpeg" alt="Eventos Corporativos">
+              <img src="./images/corporativo/corporativo.jpeg" alt="Eventos Corporativos" loading="lazy" decoding="async">
             </div>
 
             <div class="service-card__body">
@@ -335,9 +352,8 @@
             </div>
 
             <div class="service-card__media">
-              <video autoplay muted loop playsinline>
+              <video autoplay muted loop playsinline preload="none">
                 <source src="./videos/aniversario.mp4" type="video/mp4">
-                Seu navegador não suporta vídeo.
               </video>
             </div>
 
@@ -362,7 +378,7 @@
             </div>
 
             <div class="service-card__media">
-              <img src="./images/privado/privado.jpeg" alt="Jantar Privado">
+              <img src="./images/privado/privado.jpeg" alt="Jantar Privado" loading="lazy" decoding="async">
             </div>
 
             <div class="service-card__body">
@@ -386,7 +402,7 @@
             </div>
 
             <div class="service-card__media">
-              <img src="./images/consultoria/consultoria.png" alt="Consultoria Gastronômica">
+              <img src="./images/consultoria/consultoria.png" alt="Consultoria Gastronômica" loading="lazy" decoding="async">
             </div>
 
             <div class="service-card__body">
@@ -411,7 +427,7 @@
             </div>
 
             <div class="service-card__media">
-              <img src="./images/consultoria/cardapio.jpg" alt="Desenvolvimento de Cardápios">
+              <img src="./images/consultoria/cardapio.jpg" alt="Desenvolvimento de Cardápios" loading="lazy" decoding="async">
             </div>
 
             <div class="service-card__body">

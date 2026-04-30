@@ -1248,29 +1248,21 @@ input, textarea, select { font-family: inherit; }
 
 .carousel__viewport {
   flex: 1;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 0.25rem 0.25rem 1rem;
+  overflow: hidden;
   width: 100%;
   max-width: 100%;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.25rem;
 }
-
-.carousel__viewport::-webkit-scrollbar { display: none; }
 
 .carousel__track {
   display: flex;
   gap: 1.25rem;
   width: 100%;
+  will-change: transform;
 }
 
 .carousel__slide {
   flex: 0 0 calc((100% - 3.75rem) / 4);
-  scroll-snap-align: start;
   min-width: 0;
   box-sizing: border-box;
 }

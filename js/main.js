@@ -175,41 +175,76 @@ function buildCarousel(slidesHTML, extraClass) {
 
 function bindCarousel(root) {
   const viewport = root.querySelector('.carousel__viewport');
-  const prev     = root.querySelector('.carousel__btn--prev');
-  const next     = root.querySelector('.carousel__btn--next');
-  if (!viewport || !prev || !next) return;
+  const track    = root.querySelector('.carousel__track');
+  const prevBtn  = root.querySelector('.carousel__btn--prev');
+  const nextBtn  = root.querySelector('.carousel__btn--next');
+  if (!viewport || !track || !prevBtn || !nextBtn) return;
 
-  function updateState() {
-    const max = viewport.scrollWidth - viewport.clientWidth - 2;
-    prev.disabled = viewport.scrollLeft <= 0;
-    next.disabled = viewport.scrollLeft >= max;
+  let idx = 0;
+
+  function slideW() {
+    const first = track.children[0];
+    if (!first) return 0;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    return first.offsetWidth + gap;
   }
 
-  function step(dir) {
-    viewport.scrollBy({ left: dir * viewport.clientWidth * 0.85, behavior: 'smooth' });
+  function maxIdx() {
+    const sw = slideW();
+    if (!sw) return 0;
+    const visible = Math.max(1, Math.floor((viewport.offsetWidth + 1) / sw));
+    return Math.max(0, track.children.length - visible);
   }
 
-  prev.addEventListener('click', () => step(-1));
-  next.addEventListener('click', () => step(1));
-  viewport.addEventListener('scroll', updateState, { passive: true });
-  window.addEventListener('resize', updateState);
+  function moveTo(i, animated) {
+    idx = Math.max(0, Math.min(i, maxIdx()));
+    track.style.transition = animated === false ? 'none' : 'transform 0.35s cubic-bezier(.4,0,.2,1)';
+    track.style.transform  = `translateX(${-idx * slideW()}px)`;
+    prevBtn.disabled = idx <= 0;
+    nextBtn.disabled = idx >= maxIdx();
+  }
 
-  // Touch swipe — só aciona o carrossel se o movimento for primariamente horizontal
-  let startX = 0, startY = 0;
+  prevBtn.addEventListener('click', () => moveTo(idx - 1));
+  nextBtn.addEventListener('click', () => moveTo(idx + 1));
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => moveTo(idx, false), 100);
+  });
+
+  // Touch — só move o carrossel se o gesto for primariamente horizontal.
+  // Sem overflow-x:auto no viewport, gestos verticais vão direto para a página.
+  let tx0 = 0, ty0 = 0, dragging = false, dir = null;
+
   viewport.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
+    tx0 = e.touches[0].clientX;
+    ty0 = e.touches[0].clientY;
+    dragging = false;
+    dir = null;
+    track.style.transition = 'none';
   }, { passive: true });
-  viewport.addEventListener('touchend', e => {
-    const dx = startX - e.changedTouches[0].clientX;
-    const dy = startY - e.changedTouches[0].clientY;
-    // Só avança o slide se o gesto for mais horizontal do que vertical
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      step(dx > 0 ? 1 : -1);
+
+  viewport.addEventListener('touchmove', e => {
+    const dx = e.touches[0].clientX - tx0;
+    const dy = e.touches[0].clientY - ty0;
+    if (!dir && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
+      dir = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+      if (dir === 'h') dragging = true;
+    }
+    if (dragging) {
+      track.style.transform = `translateX(${-(idx * slideW() - dx)}px)`;
     }
   }, { passive: true });
 
-  requestAnimationFrame(updateState);
+  viewport.addEventListener('touchend', e => {
+    if (!dragging) return;
+    dragging = false;
+    const dx = e.changedTouches[0].clientX - tx0;
+    moveTo(Math.abs(dx) > 50 ? idx + (dx < 0 ? 1 : -1) : idx);
+  }, { passive: true });
+
+  requestAnimationFrame(() => moveTo(0, false));
 }
 
 function dishCardHTML(dish, segmentTag) {
@@ -512,14 +547,36 @@ document.querySelectorAll(
 });
 
 // =====================================================
-// PARALLAX (hero)
+// PARALLAX (hero) — throttled com rAF
 // =====================================================
 const heroBg = document.querySelector('.hero__bg');
+let rafPending = false;
 window.addEventListener('scroll', () => {
-  if (heroBg && window.scrollY < window.innerHeight) {
-    heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
-  }
+  if (rafPending) return;
+  rafPending = true;
+  requestAnimationFrame(() => {
+    if (heroBg && window.scrollY < window.innerHeight) {
+      heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+    }
+    rafPending = false;
+  });
 }, { passive: true });
+
+// =====================================================
+// LAZY AUTOPLAY DE VÍDEOS (preload="none" precisa de trigger)
+// =====================================================
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const video = entry.target;
+    if (entry.isIntersecting) {
+      if (video.readyState === 0) video.load();
+      video.play().catch(() => {});
+      videoObserver.unobserve(video);
+    }
+  });
+}, { threshold: 0.25 });
+
+document.querySelectorAll('video[preload="none"]').forEach(v => videoObserver.observe(v));
 
 // =====================================================
 // INIT
