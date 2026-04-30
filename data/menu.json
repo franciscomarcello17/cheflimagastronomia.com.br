@@ -2,8 +2,7 @@
   "segments": [
     { "id": "entradas",   "label": "Entradas",          "tag": "Entrada" },
     { "id": "principais", "label": "Pratos Principais", "tag": "Prato Principal" },
-    { "id": "sobremesas", "label": "Sobremesas",        "tag": "Sobremesa" },
-    { "id": "all",        "label": "Todos",             "tag": "Sobremesa" }
+    { "id": "sobremesas", "label": "Sobremesas",        "tag": "Sobremesa" }
   ],
   "dishes": [
     {

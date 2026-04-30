@@ -443,16 +443,29 @@ if (contactForm) {
       'outro':          'Outro',
     };
 
-    let text  = `Olá, Cheff Lima! 👨‍🍳\n\n`;
-    text += `Meu nome é *${name}* e tenho interesse nos seus serviços.\n\n`;
-    if (phone)   text += `📱 *Telefone:* ${phone}\n`;
-    if (email)   text += `✉️ *E-mail:* ${email}\n`;
-    text += `🍽️ *Tipo de evento:* ${serviceLabels[service] || service || 'Não informado'}\n`;
-    if (guests)  text += `👥 *Convidados:* ${guests}\n`;
-    if (message) text += `\n📝 *Mensagem:*\n${message}`;
-    text += `\n\nAguardo seu contato!`;
+    let text  = `Olá, Chef Lima!\n\n`;
 
-    window.open(`https://wa.me/5547999999999?text=${encodeURIComponent(text)}`, '_blank');
+    text += `*SOLICITAÇÃO DE ORÇAMENTO*\n`;
+    text += `-----------------------------------------------------\n\n`;
+
+    text += `*Nome:* ${name}\n`;
+
+    if (phone) text += `*Telefone:* ${phone}\n`;
+    if (email) text += `*E-mail:* ${email}\n`;
+
+    text += `*Tipo de evento:* ${serviceLabels[service] || service || 'Não informado'}\n`;
+
+    if (guests) text += `*Número de convidados:* ${guests}\n`;
+
+    if (message) {
+      text += `\n*Mensagem:*\n${message}\n`;
+    }
+
+    text += `\n-----------------------------------------------------\n`;
+    text += `Aguardo seu contato.\n\n`;
+    text += `Obrigado!`;
+
+    window.open(`https://wa.me/554788175366?text=${encodeURIComponent(text)}`, '_blank');
   });
 }
 
