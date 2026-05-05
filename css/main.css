@@ -205,6 +205,7 @@ input, textarea, select { font-family: inherit; }
 }
 
 .btn--primary {
+  display: flex;
   background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold));
   color: var(--black);
   box-shadow: var(--shadow-gold);
